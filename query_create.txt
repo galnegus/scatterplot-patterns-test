@@ -1,0 +1,26 @@
+Let(
+  {
+    "ref": Select("ref", Create(Collection("surveys"), { data: { time: 6.2131 }}))
+  },
+  Do(
+    Create(
+      Collection("users"),
+      {
+        data: {
+          name: "Alice",
+          survey: Var("ref")
+        }
+      }
+    ),
+    Map(
+      [
+        [1.232, "1000_3_close", "patterns"],
+        [1.642, "10000_7_medium", "winglets"],
+        [1.752, "100_5_far", "color"]
+      ],
+      Lambda(["time", "dataset", "viz"],
+        Create(Collection("test_cases"), { data: { time: Var("time"), dataset: Var("dataset"), viz: Var("viz"), survey: Var("ref") }})
+      )
+    )
+  )
+)

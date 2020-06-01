@@ -1,0 +1,5 @@
+Initially, there can be 3 different tables/collection:
+
+1. Users: contains metadata about the survey participant, owner: Survey
+2. Surveys: the survey itself
+3. TestCase: one test, containing info about data parameters and type of viz, owner: Survey

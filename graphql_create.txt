@@ -1,0 +1,40 @@
+mutation {
+  createSurvey(data: {
+    totalTime: 5.5676
+    user: {
+      create: {
+        name: "Alice"
+      }
+    }
+    testCases: {
+      create: [
+        {
+          time: 1.354
+          dataSet: "100_3_A"
+          vizType: "patterns"
+        }, {
+          time: 1.123
+          dataSet: "1000_5_B"
+          vizType: "winglets"
+        }, {
+          time: 1.765
+          dataSet: "10000_7_C"
+          vizType: "colors"
+        }
+      ]
+    }
+  }) {
+    _id
+    totalTime
+    user {
+      name
+    }
+    testCases {
+      data {
+        time
+        dataSet
+        vizType
+      }
+    }
+  }
+}

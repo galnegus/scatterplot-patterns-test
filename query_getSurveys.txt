@@ -1,0 +1,6 @@
+Map(
+  Select("data", Paginate(Match(Index("all_surveys")))),
+  Lambda("ref", 
+    Get(Var("ref"))
+  )
+)

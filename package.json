@@ -8,8 +8,34 @@
     "start": "next start"
   },
   "dependencies": {
+    "@blueprintjs/core": "^3.26.1",
+    "camera-2d-simple": "^2.2.1",
+    "dom-2d-camera": "^1.0.2",
+    "es6-promise": "^4.2.8",
+    "faunadb": "^2.14.1",
+    "gl-bench": "^0.3.93",
+    "gl-matrix": "^3.3.0",
+    "glsl-conditionals": "^1.0.0",
+    "glslify": "^7.0.0",
+    "glslify-loader": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "kdbush": "^3.0.0",
+    "lodash": "^4.17.15",
     "next": "^9.3.3",
+    "pub-sub-es": "^1.2.1",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "regl": "^1.6.1",
+    "regl-line": "^0.1.4",
+    "tinycolor2": "^1.4.1",
+    "with-raf": "^1.1.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.1.0",
+    "eslint-plugin-react": "^7.20.0",
+    "file-loader": "^6.0.0",
+    "raw-loader": "^4.0.1"
   }
 }

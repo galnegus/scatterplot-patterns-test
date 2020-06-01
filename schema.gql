@@ -1,0 +1,23 @@
+type Survey {
+  totalTime: Float!
+  user: User!
+  testCases: [TestCase!] @relation
+}
+
+type User {
+  name: String
+  survey: Survey!
+}
+
+type TestCase {
+  time: Float!
+  dataSet: String!
+  vizType: String!
+  survey: Survey!
+}
+
+type Query {
+  allSurveys: [Survey!]
+  allUsers: [User!]
+  allTestCases: [TestCase!]
+}
