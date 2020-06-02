@@ -54,7 +54,7 @@ export default class PatternManager {
   }
 
   updateSize() {
-    this.#maxCategories = Math.max(...Object.keys(this.#patterns)) + 1;
+    this.#maxCategories = Math.max(...Object.keys(this.#patterns), 0) + 1;
     this.#atlasSize = [this.#maxCategories, 1];
     this.#fbo.resize(this.#maxCategories * PATTERN_RESOLUTION[0], PATTERN_RESOLUTION[1]);
   }
@@ -72,6 +72,7 @@ export default class PatternManager {
       this.destroy(category);
     });
 
+    this.updateSize();
   }
 
   set(category, options) {
@@ -135,6 +136,8 @@ export default class PatternManager {
   }
 
   draw(time, animationMix, useColors, showPatterns) {
+    if (!time) return;
+
     let sequenceValue = 1;
     const sequenceInit = (time / this.#sequencePatternDuration) % this.#maxCategories;
 

@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { Button } from '@blueprintjs/core';
 import dynamic from 'next/dynamic'
 import Sidebar from './Sidebar';
-import { VIZ } from '../utils/TestCase';
 import LoadingOverlay from './LoadingOverlay';
 import { pushTestCase } from '../utils/store';
 
@@ -19,23 +18,32 @@ const Winglets = dynamic(
 // TODO add winglets, add conditional to determine if rendering winglets or scatterplot
 
 const Test = ({ goToNext, testCase }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const loadingWrapperRef = useRef(null);
   const startTime = useRef(null);
 
+
+  const startLoading = () => {
+    if (!loadingWrapperRef.current) return;
+
+    loadingWrapperRef.current.style.opacity = 1;
+  };
   const stopLoading = () => {
-    setIsLoading(false);
-  }
+    if (!loadingWrapperRef.current) return;
+
+    loadingWrapperRef.current.style.opacity = 0;
+  };
   const startTimer = () => {
     requestAnimationFrame(() => {
       startTime.current = new Date();
     });
-  }
+  };
   const stopTimer = () => {
     const endTime = new Date();
     return (endTime - startTime.current) / 1000;
-  }
+  };
 
   const handleButtonClick = (answer) => {
+    startLoading();
     const time = stopTimer();
 
     pushTestCase({
@@ -44,20 +52,30 @@ const Test = ({ goToNext, testCase }) => {
       testCase
     });
 
-    goToNext();
+    requestAnimationFrame(() => goToNext());
   };
 
   return (
     <div className="container">
       <div className="content">
-        {isLoading &&
+        <div className="loading-wrapper" ref={loadingWrapperRef}>
           <LoadingOverlay />
-        }
+        </div>
 
-        {testCase.viz === VIZ.WINGLETS
-          ? <Winglets data={testCase.data()} stopLoading={stopLoading} startTimer={startTimer} />
-          : <Scatterplot data={testCase.data()} viz={testCase.viz} stopLoading={stopLoading} startTimer={startTimer} />
-        }
+        <Winglets
+          data={testCase.data()}
+          viz={testCase.viz}
+          stopLoading={stopLoading}
+          startTimer={startTimer}
+        />
+
+        <Scatterplot
+          data={testCase.data()}
+          viz={testCase.viz}
+          stopLoading={stopLoading}
+          startTimer={startTimer}
+        />
+
       </div>
 
       <Sidebar>
@@ -94,6 +112,21 @@ const Test = ({ goToNext, testCase }) => {
           display: flexbox;
           align-items: center;
           justify-content: center;
+        }
+
+        .loading-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 10;
+
+          opacity: 1;
+          transition: opacity 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
         }
       `}</style>
 

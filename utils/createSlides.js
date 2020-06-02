@@ -7,8 +7,8 @@ export default function createSlides(testCases, goToNext) {
 
   slides.push((<Introduction goToNext={goToNext} />));
 
-  testCases.forEach((testCase, i) => {
-    slides.push((<Test goToNext={goToNext} key={i} testCase={testCase} />))
+  testCases.forEach((testCase) => {
+    slides.push((<Test goToNext={goToNext} testCase={testCase} />))
   });
 
   slides.push((<Outro />))

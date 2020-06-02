@@ -708,7 +708,7 @@ const createScatterplot = ({
   };
 
   const createBBoxTexture = (bboxByCategory) => {
-    const numCategories = Math.max(...Object.keys(bboxByCategory)) + 1;
+    const numCategories = Math.max(...Object.keys(bboxByCategory), 0) + 1;
     bboxTexRes = Math.max(2, Math.ceil(Math.sqrt(numCategories)));
     const data = new Float32Array(bboxTexRes ** 2 * 4);
     for (let i = 0; i < numCategories; i += 1) {
@@ -795,6 +795,8 @@ const createScatterplot = ({
     // allows patternManager to partition points so that points of a given category are rendered last
     // uses hoare partitioning scheme
     patternManager.setPartitioningFunc((category) => {
+      if (newPoints.length === 0) return;
+
       let left = 0;
       let right = newPoints.length - 1;
 

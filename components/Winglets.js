@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import createScatterplot from '../utils/winglets/regl-scatterplot-winglets.esm.min.js';
+import { VIZ } from '../utils/TestCase';
 
 const wingletsOptions = {
   showWinglets: true,
@@ -24,13 +25,13 @@ export const greyscaleColors = [
   '#FFFFFF'
 ];
 
-function initScatterplot({ canvas, setScatterplot, data, stopLoading, startTimer }) {
+function initScatterplot({ canvas, setScatterplot }) {
   let { width, height } = canvas.getBoundingClientRect();
 
   const lassoMinDelay = 10;
   const lassoMinDist = 2;
   const pointSize = 5;
-  const showRecticle = true;
+  const showRecticle = false;
   const recticleColor = [1, 1, 0.878431373, 0.33];
 
   const scatterplot = createScatterplot({
@@ -56,13 +57,9 @@ function initScatterplot({ canvas, setScatterplot, data, stopLoading, startTimer
     colors: greyscaleColors
   });
   setScatterplot(scatterplot);
-  scatterplot.draw(data.data);
-
-  stopLoading();
-  startTimer();
 }
 
-const Winglets = ({ data, stopLoading, startTimer }) => {
+const Winglets = ({ data, stopLoading, viz, startTimer }) => {
   const [scatterplot, setScatterplot] = useState(null);
   const canvasRef = useCallback((canvas) => {
     if (canvas !== null)
@@ -70,13 +67,21 @@ const Winglets = ({ data, stopLoading, startTimer }) => {
   }, [setScatterplot]);
 
   useEffect(() => {
+    if (scatterplot !== null && viz === VIZ.WINGLETS) {
+      scatterplot.draw(data.data);
+      stopLoading();
+      startTimer();
+    }
+
     return () => {
-      if (scatterplot) scatterplot.destroy()
-    };
-  }, []);
+      if (scatterplot) {
+        scatterplot.draw([[-2, -2, 0, 0], [-2, -3, 0, 0], [-3, -2, 0, 0]]);
+      }
+    }
+  }, [scatterplot, data, viz]);
 
   return (
-    <div className="canvas-wrapper">
+    <div className="canvas-wrapper" style={{ visibility: viz === VIZ.WINGLETS ? 'visible' : 'hidden' }}>
       <canvas ref={canvasRef} className="canvas" />
 
       <style jsx>{`

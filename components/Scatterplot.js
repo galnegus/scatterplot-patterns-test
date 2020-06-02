@@ -10,13 +10,13 @@ function toHsvColor(hex) {
   return [hsvObj.h / 360, hsvObj.s, hsvObj.v];
 }
 
-function initScatterplot({ canvas, setScatterplot, data, viz, stopLoading, startTimer }) {
+function initScatterplot({ canvas, setScatterplot }) {
   let { width, height } = canvas.getBoundingClientRect();
 
   const lassoMinDelay = 10;
   const lassoMinDist = 2;
   const pointSize = 5;
-  const showRecticle = true;
+  const showRecticle = false;
   const recticleColor = [1, 1, 0.878431373, 0.33];
 
   const scatterplot = createScatterplot({
@@ -36,58 +36,74 @@ function initScatterplot({ canvas, setScatterplot, data, viz, stopLoading, start
   };
   window.addEventListener('resize', resizeHandler);
 
-  const patternsWithColors = patterns
-    .map((pattern, i) => ({ ...pattern, hsvColor: toHsvColor(categoryColors[i]) }))
-    .slice(0, data.meta.nClusters);
-
   scatterplot.set({ colorBy: 'category', colors: categoryColors });
-  scatterplot.patternManager.setAll(patternsWithColors);
   setScatterplot(scatterplot);
-  scatterplot.draw(data.data);
-
-  if (viz === VIZ.PATTERNS) {
-    scatterplot.set({
-      useColors: false,
-      animationMix: [0, 0.5, 0.8]
-    });
-  } else if (viz === VIZ.SEQUENTIAL) {
-    scatterplot.set({
-      useColors: false,
-      useSequence: true,
-      sequencePatternDuration: 1.5,
-      sequenceTransitionDuration: 0.2,
-      animationMix: [0, 0.5, 0.8]
-    });
-  } else if (viz === VIZ.COLOR) {
-    scatterplot.set({
-      showPatterns: false,
-    });
-  } else if (viz === VIZ.GREYSCALE) {
-    scatterplot.set({
-      showPatterns: false,
-      useColors: false,
-    });
-  }
-
-  stopLoading();
-  startTimer();
 }
 
 const Scatterplot = ({ data, viz, stopLoading, startTimer }) => {
   const [scatterplot, setScatterplot] = useState(null);
   const canvasRef = useCallback((canvas) => {
     if (canvas !== null)
-      initScatterplot({ canvas, setScatterplot, data, viz, stopLoading, startTimer });
+      initScatterplot({ canvas, setScatterplot, data, stopLoading, startTimer });
   }, [setScatterplot]);
 
   useEffect(() => {
+    if (scatterplot !== null && viz !== VIZ.WINGLETS) {
+      const patternsWithColors = patterns
+        .map((pattern, i) => ({ ...pattern, hsvColor: toHsvColor(categoryColors[i]) }))
+        .slice(0, data.meta.nClusters);
+      scatterplot.patternManager.setAll(patternsWithColors);
+
+      scatterplot.draw(data.data);
+
+      stopLoading();
+      startTimer();
+
+      if (viz === VIZ.PATTERNS) {
+        scatterplot.set({
+          useColors: false,
+          animationMix: [0, 0.5, 0.8],
+          useSequence: false,
+          showPatterns: true
+        });
+      } else if (viz === VIZ.SEQUENTIAL) {
+        scatterplot.set({
+          useColors: false,
+          useSequence: true,
+          sequencePatternDuration: 1.5,
+          sequenceTransitionDuration: 0.2,
+          animationMix: [0, 0.5, 0.8],
+          showPatterns: true
+        });
+      } else if (viz === VIZ.COLOR) {
+        scatterplot.set({
+          useColors: true,
+          showPatterns: false,
+          useSequence: false,
+        });
+      } else if (viz === VIZ.GREYSCALE) {
+        scatterplot.set({
+          showPatterns: false,
+          useColors: false,
+          useSequence: false,
+        });
+      }
+    }
+
+
     return () => {
-      if (scatterplot) scatterplot.destroy()
-    };
-  }, []);
+      if (scatterplot) {
+        const patternsWithColors = patterns
+          .map((pattern, i) => ({ ...pattern, hsvColor: toHsvColor(categoryColors[i]) }))
+          .slice(0, 1);
+        scatterplot.patternManager.setAll(patternsWithColors);
+        scatterplot.draw([[-2, -2, 0, 0]]);
+      }
+    }
+  }, [scatterplot, viz, data]);
 
   return (
-    <div className="canvas-wrapper">
+    <div className="canvas-wrapper"  style={{ visibility: viz === VIZ.WINGLETS ? 'hidden' : 'visible' }}>
       <canvas ref={canvasRef} className="canvas" />
 
       <style jsx>{`
