@@ -82,7 +82,6 @@ const Test = ({ goToNext, testCase }) => {
 
         .content {
           flex-grow: 1;
-          text-align: center;
           display: flexbox;
           align-items: center;
           justify-content: center;
