@@ -146,6 +146,7 @@ const createScatterplot = ({
   let animateDepth = false;
   let showPatterns = true;
   let useColors = true;
+  let tick = null;
 
   let patternManager = new PatternManager(regl);
   patternManager.set(0, {
@@ -1140,12 +1141,14 @@ const createScatterplot = ({
     canvas.addEventListener('click', mouseClickHandler, false);
     canvas.addEventListener('dblclick', mouseDblClickHandler, false);
 
-    regl.frame(({ time }) => {
+    tick = regl.frame(({ time }) => {
       draw(time);
     });
   };
 
   const destroy = () => {
+    if (tick) tick.cancel;
+
     window.removeEventListener('keyup', keyUpHandler, false);
     window.removeEventListener('blur', blurHandler, false);
     window.removeEventListener('mousedown', mouseDownHandler, false);
