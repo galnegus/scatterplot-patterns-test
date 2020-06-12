@@ -1,40 +1,72 @@
 mutation {
   createSurvey(data: {
-    totalTime: 5.5676
-    user: {
-      create: {
-        name: "Alice"
-      }
-    }
     testCases: {
       create: [
         {
-          time: 1.354
-          dataSet: "100_3_A"
-          vizType: "patterns"
+          order: 0
+          nClusters: 3
+          nPoints: 1000
+          viz: "colors"
+          time: 1.253
+          answer: 3
         }, {
-          time: 1.123
-          dataSet: "1000_5_B"
-          vizType: "winglets"
+          order: 1
+          nClusters: 5
+          nPoints: 10000
+          viz: "winglets"
+          time: 0.945
+          answer: 5
         }, {
-          time: 1.765
-          dataSet: "10000_7_C"
-          vizType: "colors"
+          order: 2
+          nClusters: 7
+          nPoints: 100
+          viz: "patterns"
+          time: 0.553
+          answer: 6
         }
       ]
     }
-  }) {
-    _id
-    totalTime
-    user {
-      name
-    }
-    testCases {
-      data {
-        time
-        dataSet
-        vizType
+    viewport: {
+      create: {
+        width: 100
+        height: 200
       }
     }
+    dummyTest: {
+      create: {
+        nClusters: 3
+        nPoints: 1000
+        viz: "winglets"
+        time: 0.453
+        answer: 3
+      }
+    }
+    totalTime: 5.5676
+    userAgent: "idontknow"
+  }) {
+    _id
+    testCases {
+      data {
+        order
+        nClusters
+        nPoints
+        viz
+        time
+        answer
+      }
+    }
+    viewport {
+      width
+      height
+    }
+    dummyTest {
+      nClusters
+      nPoints
+      viz
+      time
+      answer
+    }
+    totalTime
+    userAgent
   }
 }

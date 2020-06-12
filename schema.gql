@@ -1,23 +1,37 @@
 type Survey {
-  totalTime: Float!
-  user: User!
   testCases: [TestCase!] @relation
+  viewport: Viewport!
+  dummyTest: DummyTest!
+  totalTime: Float!
+  userAgent: String
 }
 
-type User {
-  name: String
+type Viewport {
+  width: Int!
+  height: Int!
+  survey: Survey!
+}
+
+type DummyTest {
+  nClusters: Int!
+  nPoints: Int!
+  viz: String!
+  time: Float!
+  answer: Int!
   survey: Survey!
 }
 
 type TestCase {
+  order: Int!
+  nClusters: Int!
+  nPoints: Int!
+  viz: String!
   time: Float!
-  dataSet: String!
-  vizType: String!
+  answer: Int!
   survey: Survey!
 }
 
 type Query {
   allSurveys: [Survey!]
-  allUsers: [User!]
   allTestCases: [TestCase!]
 }

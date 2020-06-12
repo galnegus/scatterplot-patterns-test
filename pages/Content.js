@@ -5,8 +5,26 @@ const Content = () => {
   const [data, setData] = useState([])
   useEffect(() => {
     async function getData() {
-      const res = await fetch('/api')
+      const query = `
+        query {
+          allSurveys {
+            data {
+              _id
+            }
+          }
+        }
+      `;
+
+      const res = await fetch('/api', {
+        method: 'post',
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+        },
+        body: `query=${query}`
+      });
+
       const newData = await res.json()
+      console.log(newData);
       setData(newData)
     }
     getData()

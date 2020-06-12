@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Button } from '@blueprintjs/core';
 import dynamic from 'next/dynamic'
 import Sidebar from './Sidebar';
@@ -47,7 +47,7 @@ const Test = ({ goToNext, testCase }) => {
     const time = stopTimer();
 
     pushTestCase({
-      answer: String(answer),
+      answer: answer,
       time,
       testCase
     });

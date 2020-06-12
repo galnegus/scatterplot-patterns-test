@@ -1,6 +1,8 @@
 const secret = process.env.FAUNADB_SECRET_KEY;
 
 export default async (req, res) => {
+  const query = req.body.query;
+
   const response = await fetch('https://graphql.fauna.com/graphql', {
     method: 'post',
     headers: new Headers({
@@ -8,15 +10,7 @@ export default async (req, res) => {
       'Authorization': `Bearer ${secret}`
     }),
     body: JSON.stringify({
-     query: `
-      query {
-        allSurveys {
-          data {
-            _id
-          }
-        }
-      }
-     ` 
+     query
     }),
   })
 
