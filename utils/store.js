@@ -37,6 +37,7 @@ export function pushTestCase({ testCase, time, answer }) {
     nClusters: testCase.nClusters,
     nPoints: testCase.nPoints,
     viz: testCase.viz,
+    overlap: testCase.overlap,
     time,
     answer
   }
@@ -51,6 +52,7 @@ export function getCreateQuery() {
       nClusters: ${testCase.nClusters}
       nPoints: ${testCase.nPoints}
       viz: "${testCase.viz}"
+      overlap: ${testCase.overlap}
       time: ${testCase.time}
       answer: ${testCase.answer}
     }`;
@@ -89,6 +91,7 @@ export function getCreateQuery() {
             nClusters
             nPoints
             viz
+            overlap
             time
             answer
           }

@@ -33,6 +33,7 @@ class TestCase {
     this.nClusters = nClusters;
     this.nPoints = nPoints;
     this.viz = viz;
+    this.overlap = this.data().meta.overlap;
   }
 
   filename() {

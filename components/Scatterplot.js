@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import tinycolor from 'tinycolor2';
+import _shuffle from 'lodash/shuffle';
 import categoryColors from '../utils/categoryColors';
 import createScatterplot from '../utils/scatterplot';
 import patterns from '../utils/patterns';
@@ -49,8 +50,9 @@ const Scatterplot = ({ data, viz, stopLoading, startTimer }) => {
 
   useEffect(() => {
     if (scatterplot !== null && viz !== VIZ.WINGLETS) {
+      const shuffledColors = _shuffle(categoryColors);
       const patternsWithColors = patterns
-        .map((pattern, i) => ({ ...pattern, hsvColor: toHsvColor(categoryColors[i]) }))
+        .map((pattern, i) => ({ ...pattern, hsvColor: toHsvColor(shuffledColors[i]) }))
         .slice(0, data.meta.nClusters);
       scatterplot.patternManager.setAll(patternsWithColors);
 
@@ -79,7 +81,7 @@ const Scatterplot = ({ data, viz, stopLoading, startTimer }) => {
         scatterplot.set({
           useColors: true,
           showPatterns: false,
-          useSequence: false,
+          useSequence: false
         });
       } else if (viz === VIZ.GREYSCALE) {
         scatterplot.set({

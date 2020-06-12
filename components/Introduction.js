@@ -79,7 +79,7 @@ const introduction = ({ goToNext }) => {
 
         .video-wrapper {
           position: relative;
-          width: 70vw;
+          width: 60vw;
           padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
         }
 

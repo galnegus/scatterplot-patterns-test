@@ -26,6 +26,7 @@ type TestCase {
   nClusters: Int!
   nPoints: Int!
   viz: String!
+  overlap: Float!
   time: Float!
   answer: Int!
   survey: Survey!

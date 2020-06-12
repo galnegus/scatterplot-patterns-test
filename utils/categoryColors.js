@@ -7,8 +7,7 @@ const categoryColors = [
   '#ffff33',
   '#a65628',
   '#f781bf',
-  '#999999', 
-  '#0fc'
+  '#999999'
 ];
 
 export default categoryColors;

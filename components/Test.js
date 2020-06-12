@@ -88,6 +88,7 @@ const Test = ({ goToNext, testCase }) => {
         <Button className="test-button" onClick={() => handleButtonClick(6)}>6 clusters</Button>
         <Button className="test-button" onClick={() => handleButtonClick(7)}>7 clusters</Button>
         <Button className="test-button" onClick={() => handleButtonClick(8)}>8 clusters</Button>
+        <Button className="test-button" onClick={() => handleButtonClick(-1)}>I cannot decide</Button>
       </Sidebar>
 
       <style jsx>{`

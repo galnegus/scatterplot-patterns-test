@@ -7,6 +7,7 @@ mutation {
           nClusters: 3
           nPoints: 1000
           viz: "colors"
+          overlap: 0.312
           time: 1.253
           answer: 3
         }, {
@@ -14,6 +15,7 @@ mutation {
           nClusters: 5
           nPoints: 10000
           viz: "winglets"
+          overlap: 0.465
           time: 0.945
           answer: 5
         }, {
@@ -21,6 +23,7 @@ mutation {
           nClusters: 7
           nPoints: 100
           viz: "patterns"
+          overlap: 0.653
           time: 0.553
           answer: 6
         }

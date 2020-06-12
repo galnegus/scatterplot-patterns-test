@@ -53,7 +53,7 @@ const DummyTest = ({ goToNext, testCase }) => {
           <LoadingOverlay />
         </div>
 
-        <h1 className="dummy-header">NOTE: This is an example, but please answer correctly</h1>
+        <h2 className="dummy-header">NOTE: This is an example, but please answer correctly</h2>
 
         <Winglets
           data={testCase.data()}
@@ -81,6 +81,7 @@ const DummyTest = ({ goToNext, testCase }) => {
         <Button className="test-button" onClick={() => handleButtonClick(6)}>6 clusters</Button>
         <Button className="test-button" onClick={() => handleButtonClick(7)}>7 clusters</Button>
         <Button className="test-button" onClick={() => handleButtonClick(8)}>8 clusters</Button>
+        <Button className="test-button" onClick={() => handleButtonClick(-1)}>I cannot decide</Button>
       </Sidebar>
 
       <style jsx>{`
