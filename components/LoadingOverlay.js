@@ -11,8 +11,12 @@ export default function LoadingOverlay() {
         <span className="text bp3-text-muted">
           Loading
         </span>
+        <div className="cool-text">
+          <div className="ellipsis">Building Scatterplot</div>
+          <div className="time-text bp3-text-muted">(this can take up to 10 seconds)</div>
+        </div>
       </div>
-      
+
       <style jsx>
       {`
         .overlay {
@@ -48,6 +52,43 @@ export default function LoadingOverlay() {
           left: 50%;
           transform: translate3d(-50%, -50%, 0);
           text-shadow: 0px 0px 8px rgba(0,0,0,0.8);
+        }
+
+        .cool-text {
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translate3d(-50%, 0, 0);
+          text-shadow: 0px 0px 8px rgba(0,0,0,0.8);
+          width: 200px;
+          margin-top: 20px;
+          line-height: 1.6;
+        }
+
+        .ellipsis {
+          text-align: center;
+          margin-left: -5px;
+        }
+
+        .ellipsis::after {
+          position: absolute;
+
+          overflow: hidden;
+          display: inline-block;
+          vertical-align: bottom;  
+          animation: ellipsis steps(4,end) 2000ms infinite;
+          content: "${'\\2026'}";
+          width: 0px;
+        }
+
+        @keyframes ellipsis {
+          to {
+            width: 1em;    
+          }
+        }
+
+        .time-text {
+          text-align: center;
         }
       `}
       </style>

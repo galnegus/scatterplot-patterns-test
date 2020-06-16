@@ -16,14 +16,16 @@ const introduction = ({ goToNext }) => {
 
   return (
     <div className="container">
-      <div className="inner">
-        <h1>Final Instructions</h1>
-        <p>
-          Good job! You are now ready for the survey.
-        </p>
-        <p>
-          You will specify the number of clusters for <strong>45</strong> different test cases, the speed and accuracy will be recorded, so make sure to answer each test case as <strong>FAST</strong> and as <strong>ACCURATELY</strong> as possible.
-        </p>
+      <div className="inner bp3-running-text bp3-text-large">
+        <h1 className="bp3-heading">Final Instructions</h1>
+        <div className="instruction-text bp3-text-muted">
+          <p>
+            Good job! You are now ready for the survey.
+          </p>
+          <p>
+            You will specify the number of clusters for <strong>45</strong> different test cases, the speed and accuracy will be recorded, so make sure to answer each test case as <strong>FAST</strong> and as <strong>ACCURATELY</strong> as possible.
+          </p>
+        </div>
         <Button
           large={true}
           intent={Intent.PRIMARY}
@@ -47,10 +49,15 @@ const introduction = ({ goToNext }) => {
         }
 
         .inner p {
-          font-size: 16px;
           width: 450px;
-          margin: 20px;
-          line-height: 1.7;
+        }
+
+        .instruction-text {
+          margin-bottom: 20px;
+        }
+
+        .instruction-text strong {
+          color: #FFFFFF;
         }
       `}</style>
     </div>

@@ -68,6 +68,7 @@ const Winglets = ({ data, stopLoading, viz, startTimer }) => {
 
   useEffect(() => {
     if (scatterplot !== null && viz === VIZ.WINGLETS) {
+      scatterplot.reset();
       scatterplot.draw(data.data);
       stopLoading();
       startTimer();

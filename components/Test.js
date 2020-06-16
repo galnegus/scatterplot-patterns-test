@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Button } from '@blueprintjs/core';
+import { Button, ProgressBar, Intent, Divider } from '@blueprintjs/core';
 import dynamic from 'next/dynamic'
 import Sidebar from './Sidebar';
 import LoadingOverlay from './LoadingOverlay';
@@ -15,9 +15,7 @@ const Winglets = dynamic(
   { ssr: false }
 )
 
-// TODO add winglets, add conditional to determine if rendering winglets or scatterplot
-
-const Test = ({ goToNext, testCase }) => {
+const Test = ({ goToNext, testCase, order }) => {
   const loadingWrapperRef = useRef(null);
   const startTime = useRef(null);
 
@@ -56,41 +54,67 @@ const Test = ({ goToNext, testCase }) => {
   };
 
   return (
-    <div className="container">
-      <div className="content">
-        <div className="loading-wrapper" ref={loadingWrapperRef}>
-          <LoadingOverlay />
+    <>
+      <div className="container">
+        <div className="content">
+          <div className="loading-wrapper" ref={loadingWrapperRef}>
+            <LoadingOverlay />
+          </div>
+
+          <Winglets
+            data={testCase.data()}
+            viz={testCase.viz}
+            stopLoading={stopLoading}
+            startTimer={startTimer}
+          />
+
+          <Scatterplot
+            data={testCase.data()}
+            viz={testCase.viz}
+            stopLoading={stopLoading}
+            startTimer={startTimer}
+          />
+
         </div>
 
-        <Winglets
-          data={testCase.data()}
-          viz={testCase.viz}
-          stopLoading={stopLoading}
-          startTimer={startTimer}
-        />
+        <Sidebar>
+          
 
-        <Scatterplot
-          data={testCase.data()}
-          viz={testCase.viz}
-          stopLoading={stopLoading}
-          startTimer={startTimer}
-        />
+          <div className="vertical-center">
+            <div className="sidebar-progress-wrapper">
+              <div className="sidebar-progress">
+                <h5 className="bp3-heading">
+                  Survey Progress:{' '}
+                  <span className="progress-weight">
+                    <span className="bp3-text-muted">{order}</span> of <span className="bp3-text-muted">45</span>
+                  </span>
+                </h5>
+                <ProgressBar
+                  stripes={true}
+                  animate={false}
+                  value={ order / 45}
+                  intent={Intent.PRIMARY}
+                />
 
+              </div>
+              <div className="progress-divider-wrapper"><Divider /></div>
+            </div>
+
+            <h5 className="bp3-heading button-heading">How many clusters are there?</h5>
+            <Button className="test-button" onClick={() => handleButtonClick(1)}>1 cluster</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(2)}>2 clusters</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(3)}>3 clusters</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(4)}>4 clusters</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(5)}>5 clusters</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(6)}>6 clusters</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(7)}>7 clusters</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(8)}>8 clusters</Button>
+            <Button className="test-button" onClick={() => handleButtonClick(-1)}>I cannot decide</Button>
+          </div>
+        </Sidebar>
+
+        
       </div>
-
-      <Sidebar>
-        <h3>How many clusters are there?</h3>
-        <Button className="test-button" onClick={() => handleButtonClick(1)}>1 cluster</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(2)}>2 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(3)}>3 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(4)}>4 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(5)}>5 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(6)}>6 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(7)}>7 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(8)}>8 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(-1)}>I cannot decide</Button>
-      </Sidebar>
-
       <style jsx>{`
         .container {
           width: 100%;
@@ -129,6 +153,58 @@ const Test = ({ goToNext, testCase }) => {
           opacity: 1;
           transition: opacity 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
         }
+
+        .vertical-center {
+          display: flex;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
+          flex-direction: column;
+          height: 100%;
+        }
+
+        .button-heading {
+          margin-bottom: 15px;
+        }
+
+        .sidebar-progress-wrapper {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        .sidebar-progress {
+          text-align: center;
+          padding: 40px 40px;
+        }
+
+        @media (max-height: 685px) {
+          .sidebar-progress {
+            padding: 20px;
+            padding-bottom: 40px;
+          }
+
+          .sidebar-progress-wrapper {
+            position: relative;
+          }
+
+          .vertical-center {
+            justify-content: flex-start;
+          }
+        }
+
+        .sidebar-progress
+
+        .progress-weight {
+          font-weight: 400;
+        }
+
+        .progress-divider-wrapper {
+          padding: 0 20px;
+        }
       `}</style>
 
       <style jsx global>{`
@@ -136,7 +212,7 @@ const Test = ({ goToNext, testCase }) => {
           margin-bottom: 10px;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

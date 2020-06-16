@@ -11,7 +11,7 @@ export const VIZ = {
 // Each test case should be an instance of this class
 class OnboardingTestCase {
   constructor({ viz }) {
-    this.nClusters = 4;
+    this.nClusters = 3;
     this.nPoints = 1000;
     this.viz = viz;
   }

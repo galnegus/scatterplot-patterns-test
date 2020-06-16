@@ -1,5 +1,8 @@
+import { FocusStyleManager } from "@blueprintjs/core";
 import Head from 'next/head'
 import Content from './Content';
+
+FocusStyleManager.onlyShowFocusOnTabs();
 
 const Home = () => (
   <div className="container">

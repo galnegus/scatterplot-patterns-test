@@ -28,7 +28,7 @@ const introduction = ({ goToNext }) => {
   return (
     <div className="container">
       <div className="inner">
-        <h1>Scatterplot Survey</h1>
+        <h1 className="bp3-heading">Scatterplot Survey</h1>
         <div className="video-wrapper">
           <ReactPlayer
             url="/onboarding.mp4"
@@ -43,7 +43,7 @@ const introduction = ({ goToNext }) => {
           />
         </div>
       </div>
-      <div className="button-wrapper">
+      <div className="button-wrapper bp3-running-text">
         {!hasWatched &&
           <p className="button-text">Please watch the video instructions above before continuing.</p>
         }

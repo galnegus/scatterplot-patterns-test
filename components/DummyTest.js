@@ -53,7 +53,7 @@ const DummyTest = ({ goToNext, testCase }) => {
           <LoadingOverlay />
         </div>
 
-        <h2 className="dummy-header">NOTE: This is an example, but please answer correctly</h2>
+        <h3 className="dummy-header bp3-heading">NOTE: This is an example, but please answer correctly</h3>
 
         <Winglets
           data={testCase.data()}
@@ -72,16 +72,18 @@ const DummyTest = ({ goToNext, testCase }) => {
       </div>
 
       <Sidebar>
-        <h3>How many clusters are there?</h3>
-        <Button className="test-button" onClick={() => handleButtonClick(1)}>1 cluster</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(2)}>2 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(3)}>3 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(4)}>4 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(5)}>5 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(6)}>6 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(7)}>7 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(8)}>8 clusters</Button>
-        <Button className="test-button" onClick={() => handleButtonClick(-1)}>I cannot decide</Button>
+        <div className="vertical-center">
+          <h5 className="bp3-heading button-heading">How many clusters are there?</h5>
+          <Button className="test-button" onClick={() => handleButtonClick(1)}>1 cluster</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(2)}>2 clusters</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(3)}>3 clusters</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(4)}>4 clusters</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(5)}>5 clusters</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(6)}>6 clusters</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(7)}>7 clusters</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(8)}>8 clusters</Button>
+          <Button className="test-button" onClick={() => handleButtonClick(-1)}>I cannot decide</Button>
+        </div>
       </Sidebar>
 
       <style jsx>{`
@@ -126,6 +128,19 @@ const DummyTest = ({ goToNext, testCase }) => {
         .dummy-header {
           z-index: 5;
           text-align: center;
+        }
+
+        .vertical-center {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          text-align: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        .button-heading {
+          margin-bottom: 15px;
         }
       `}</style>
 

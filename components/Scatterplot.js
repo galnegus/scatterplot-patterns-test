@@ -56,6 +56,7 @@ const Scatterplot = ({ data, viz, stopLoading, startTimer }) => {
         .slice(0, data.meta.nClusters);
       scatterplot.patternManager.setAll(patternsWithColors);
 
+      scatterplot.reset();
       scatterplot.draw(data.data);
 
       stopLoading();

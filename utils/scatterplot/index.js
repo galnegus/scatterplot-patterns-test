@@ -858,7 +858,7 @@ const createScatterplot = ({
 
   const withDraw = f => (...args) => {
     const out = f(...args);
-    drawRaf();
+    //drawRaf();
     return out;
   };
 
