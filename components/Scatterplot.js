@@ -20,6 +20,7 @@ function initScatterplot({ canvas, setScatterplot }) {
   const showRecticle = false;
   const recticleColor = [1, 1, 0.878431373, 0.33];
 
+  const aspectRatio = width / height;
   const scatterplot = createScatterplot({
     canvas,
     width,
@@ -29,15 +30,18 @@ function initScatterplot({ canvas, setScatterplot }) {
     pointSize,
     showRecticle,
     recticleColor,
+    distance: 1.3,
+    view: null,
   });
 
   const resizeHandler = () => {
     ({ width, height } = canvas.getBoundingClientRect());
-    scatterplot.set({ width, height });
+    const aspectRatio = width / height;
+    scatterplot.set({ width, height, aspectRatio });
   };
   window.addEventListener('resize', resizeHandler);
 
-  scatterplot.set({ colorBy: 'category', colors: categoryColors });
+  scatterplot.set({ colorBy: 'category', colors: categoryColors, aspectRatio });
   setScatterplot(scatterplot);
 }
 

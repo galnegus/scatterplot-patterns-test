@@ -1,8 +1,10 @@
 import Slideshow from '../components/Slideshow';
+import NoMobile from '../components/NoMobile';
 
 const Content = () => {
   return (
     <div className="content bp3-dark">
+      <NoMobile />
       <Slideshow />
       <style jsx>{`
         .content {

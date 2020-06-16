@@ -33,6 +33,7 @@ function initScatterplot({ canvas, setScatterplot }) {
   const pointSize = 5;
   const showRecticle = false;
   const recticleColor = [1, 1, 0.878431373, 0.33];
+  const aspectRatio = width / height;
 
   const scatterplot = createScatterplot({
     canvas,
@@ -43,18 +44,22 @@ function initScatterplot({ canvas, setScatterplot }) {
     pointSize,
     showRecticle,
     recticleColor,
-    wingletsOptions
+    wingletsOptions,
+    distance: 1.3,
+    view: null,
   });
 
   const resizeHandler = () => {
     ({ width, height } = canvas.getBoundingClientRect());
-    scatterplot.set({ width, height });
+    const aspectRatio = width / height;
+    scatterplot.set({ width, height, aspectRatio });
   };
   window.addEventListener('resize', resizeHandler);
 
   scatterplot.set({
     colorBy: 'category', 
-    colors: greyscaleColors
+    colors: greyscaleColors,
+    aspectRatio
   });
   setScatterplot(scatterplot);
 }
