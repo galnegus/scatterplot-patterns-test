@@ -13,6 +13,7 @@
     "dom-2d-camera": "^1.0.2",
     "es6-promise": "^4.2.8",
     "faunadb": "^2.14.1",
+    "fingerprintjs2": "^2.1.0",
     "gl-bench": "^0.3.93",
     "gl-matrix": "^3.3.0",
     "glsl-conditionals": "^1.0.0",

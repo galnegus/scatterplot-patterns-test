@@ -1,5 +1,6 @@
 import { Button, Intent } from '@blueprintjs/core';
-import { setViewport, setUserAgent } from '../utils/store';
+import Fingerprint2 from 'fingerprintjs2';
+import { setViewport, setUserAgent, setFingerprint } from '../utils/store';
 
 const introduction = ({ goToNext }) => {
 
@@ -10,6 +11,20 @@ const introduction = ({ goToNext }) => {
 
     const ua = window.navigator.userAgent;
     setUserAgent(ua);
+
+    if (window.requestIdleCallback) {
+      requestIdleCallback(function () {
+        Fingerprint2.getV18(function (murmurHash) {
+          setFingerprint(murmurHash);
+        })
+      })
+    } else {
+      setTimeout(function () {
+        Fingerprint2.getV18(function (murmurHash) {
+          setFingerprint(murmurHash);
+        })  
+      }, 500)
+    }
 
     goToNext();
   };

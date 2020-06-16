@@ -46,6 +46,7 @@ mutation {
     }
     totalTime: 5.5676
     userAgent: "idontknow"
+    fingerprint: "abc"
   }) {
     _id
     testCases {
@@ -71,5 +72,6 @@ mutation {
     }
     totalTime
     userAgent
+    fingerprint
   }
 }

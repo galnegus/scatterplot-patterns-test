@@ -4,6 +4,7 @@ const store = {
   dummyTest: { nClusters: 0, nPoints: 0, viz: "", time: 0, answer: 0 },
   totalTime: -1,
   userAgent: "",
+  fingerprint: "",
 };
 
 export default store;
@@ -25,6 +26,10 @@ export function setDummyTest({ testCase, time, answer }) {
 
 export function setUserAgent(ua) {
   store.userAgent = ua;
+}
+
+export function setFingerprint(fp) {
+  store.fingerprint = fp;
 }
 
 export function computeTotalTime() {
@@ -83,6 +88,7 @@ export function getCreateQuery() {
         }
         totalTime: ${store.totalTime}
         userAgent: "${store.userAgent}"
+        fingerprint: "${store.fingerprint}"
       }) {
         _id
         testCases {
@@ -109,6 +115,7 @@ export function getCreateQuery() {
         }
         totalTime
         userAgent
+        fingerprint
       }
     }
   `;

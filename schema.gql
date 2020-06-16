@@ -4,6 +4,7 @@ type Survey {
   dummyTest: DummyTest!
   totalTime: Float!
   userAgent: String
+  fingerprint: String
 }
 
 type Viewport {
