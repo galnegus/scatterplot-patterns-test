@@ -29,7 +29,11 @@ const Outro = () => {
       }
       
     }
-    postData()
+    // This function call below will submit the results to FaunaDB,
+    // It's currently disabled because the database in no longer active
+    // But it could easily be replaced by some other backend if need be.
+
+    // postData()
   }, []);
 
   const pushButton = () => {

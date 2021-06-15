@@ -1,30 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
+# Scatterplot Patterns Test
 
-## Getting Started
+This is the repository which houses the user survey which was used to evaluate [Scatterplot Patterns](https://github.com/galnegus/scatterplot-patterns). It contains a Next.js/React project that was deployed on vercel, with a FaunaDB backend (currently disabled).
 
-First, run the development server:
+Contained within this repository is also the resulting data (in `r/survey.json` and `r/testCases.json`), as well as the R project that was used to analyze and plot the results (see the `r` folder).
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<div align="center">
+  <kbd>
+    <img src="https://user-images.githubusercontent.com/5460138/122098402-15c61100-ce11-11eb-8b9c-ab3770b75661.png" />
+  </kbd>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Built with
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Next.js
+- React
+- Styled JSX
+- R
 
-## Learn More
+## Runnnig this project
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/zeit/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The easiest way to run this project would probably be to configure your own vercel project using this code. It's probably also possible to extract the code and run it with react. The only reason to have Vercel/Next.js is to have a serverless API for storing the survey results in FaunaDB, if that's not needed then it's really just a react project.
