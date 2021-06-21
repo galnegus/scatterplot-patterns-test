@@ -17,6 +17,6 @@ Contained within this repository is also the resulting data (in `r/survey.json` 
 - Styled JSX
 - R
 
-## Runnnig this project
+## Running this project
 
 The easiest way to run this project would probably be to configure your own vercel project using this code. It's probably also possible to extract the code and run it with react. The only reason to have Vercel/Next.js is to have a serverless API for storing the survey results in FaunaDB, if that's not needed then it's really just a react project.
