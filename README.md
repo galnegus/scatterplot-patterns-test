@@ -15,6 +15,7 @@ Contained within this repository is also the resulting data (in `r/survey.json` 
 - Next.js
 - React
 - Styled JSX
+- GraphQL
 - R
 
 ## Running this project
